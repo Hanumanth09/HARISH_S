@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Sambhrama - Coding World</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Raleway:wght@300;400;600;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:#0a0005;
+  font-family:'Raleway',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+/* ── BG layers ── */
+.bg-layer{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(120,0,60,0.55)  0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 0%   50%,  rgba(80,0,120,0.35)  0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 50%,  rgba(180,80,0,0.25)  0%, transparent 60%),
+    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(0,0,30,0.9)     0%, transparent 80%);
+}
+.bg-grid{
+  position:fixed;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(180,0,80,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180,0,80,0.06) 1px, transparent 1px);
+  background-size:60px 60px;
+  animation:gridMove 20s linear infinite;
+}
+@keyframes gridMove{
+  from{background-position:0 0;}
+  to{background-position:60px 60px;}
+}
+
+/* ── Main wrapper ── */
+.page{
+  position:relative;z-index:1;
+  width:100%;min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:0 0 70px;
+}
+
+/* ── TOP HEADER BAR ── */
+.top-bar{
+  width:100%;
+  background:linear-gradient(90deg,#1a0010,#2d0030,#1a0010);
+  border-bottom:2px solid;
+  border-image:linear-gradient(90deg,transparent,#c8006a,#ffd700,#c8006a,transparent) 1;
+  padding:10px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.top-bar-logo{
+  display:flex;align-items:center;gap:12px;
+}
+.logo-circle{
+  width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  border:2px solid;
+  position:relative;
+  overflow:hidden;
+}
+.logo-circle.kle{
+  background:radial-gradient(circle,#001830,#000510);
+  border-color:#c8006a;
+  box-shadow:0 0 16px rgba(200,0,106,0.6);
+}
+.logo-circle.mca{
+  background:radial-gradient(circle,#1a0030,#050010);
+  border-color:#ffd700;
+  box-shadow:0 0 16px rgba(255,215,0,0.5);
+}
+.logo-circle svg{width:50px;height:50px;}
+.logo-text-wrap{display:flex;flex-direction:column;}
+.logo-name{
+  font-family:'Cinzel',serif;
+  font-size:clamp(0.55rem,1.5vw,0.85rem);
+  font-weight:700;color:#fff;
+  letter-spacing:2px;text-transform:uppercase;
+  line-height:1.3;
+}
+.logo-place{
+  font-size:clamp(0.45rem,1vw,0.65rem);
+  color:#c8a0b0;letter-spacing:3px;text-transform:uppercase;
+}
+
+/* center college title in bar */
+.top-bar-center{
+  flex:1;text-align:center;
+}
+.bar-college{
+  font-family:'Cinzel',serif;
+  font-size:clamp(0.7rem,2vw,1.1rem);
+  font-weight:900;color:#fff;
+  letter-spacing:3px;text-transform:uppercase;
+  text-shadow:0 0 20px rgba(200,0,106,0.8);
+  line-height:1.3;
+}
+.bar-dept{
+  font-size:clamp(0.5rem,1.2vw,0.75rem);
+  color:#ffd700;letter-spacing:4px;text-transform:uppercase;
+  margin-top:2px;
+}
+
+/* ── HERO SECTION ── */
+.hero{
+  width:100%;
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:40px 20px 20px;
+  position:relative;
+}
+
+/* Decorative corner ornaments */
+.hero::before,.hero::after{
+  content:'❖';
+  position:absolute;
+  font-size:2rem;color:rgba(200,0,106,0.3);
+  top:30px;
+}
+.hero::before{left:20px;}
+.hero::after{right:20px;}
+
+.presents-tag{
+  font-size:clamp(0.6rem,1.5vw,0.8rem);
+  letter-spacing:8px;color:#c8a0b0;
+  text-transform:uppercase;margin-bottom:8px;
+  animation:fadeIn 1s ease both;
+}
+
+/* SAMBHRAMA */
+.sambhrama{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(2rem,8vw,6rem);
+  font-weight:900;
+  color:#ffd700;
+  text-align:center;
+  letter-spacing:clamp(4px,2vw,16px);
+  text-transform:uppercase;
+  line-height:1;
+  text-shadow:
+    0 0 20px rgba(255,215,0,0.9),
+    0 0 40px rgba(255,165,0,0.6),
+    0 0 80px rgba(200,0,106,0.4);
+  animation:sambhramaGlow 3s ease-in-out infinite alternate, fadeIn 1.2s ease both;
+}
+@keyframes sambhramaGlow{
+  from{text-shadow:0 0 20px rgba(255,215,0,0.9),0 0 40px rgba(255,165,0,0.6),0 0 80px rgba(200,0,106,0.4);}
+  to  {text-shadow:0 0 40px rgba(255,215,0,1),  0 0 80px rgba(255,165,0,0.9),0 0 120px rgba(200,0,106,0.7);}
+}
+
+/* Ornament divider */
+.ornament{
+  display:flex;align-items:center;gap:14px;
+  margin:14px 0;width:min(500px,85vw);
+  animation:fadeIn 1.4s ease both;
+}
+.ornament-line{
+  flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,#c8006a,#ffd700);
+}
+.ornament-line.rev{
+  background:linear-gradient(90deg,#ffd700,#c8006a,transparent);
+}
+.ornament-gem{
+  font-size:1.2rem;color:#ffd700;
+  text-shadow:0 0 10px #ffd700;
+  animation:gemSpin 4s linear infinite;
+}
+@keyframes gemSpin{
+  0%,100%{transform:rotate(0deg) scale(1);}
+  50%{transform:rotate(180deg) scale(1.2);}
+}
+
+/* CODING WORLD */
+.event-name{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1rem,4vw,2.8rem);
+  font-weight:900;
+  color:#fff;
+  letter-spacing:clamp(6px,3vw,20px);
+  text-transform:uppercase;
+  text-align:center;
+  text-shadow:0 0 30px rgba(255,255,255,0.5);
+  animation:fadeIn 1.6s ease both;
+}
+.event-sub{
+  font-size:clamp(0.6rem,1.5vw,0.85rem);
+  color:#c8a0b0;letter-spacing:6px;
+  text-transform:uppercase;margin-top:6px;
+  animation:fadeIn 1.8s ease both;
+}
+
+/* ── TOPICS ── */
+.topics-section{
+  width:100%;max-width:900px;
+  padding:24px 20px 0;
+  animation:fadeIn 2s ease both;
+}
+.topics-title{
+  text-align:center;
+  font-family:'Cinzel',serif;
+  font-size:clamp(0.55rem,1.2vw,0.75rem);
+  letter-spacing:6px;color:#c8006a;
+  text-transform:uppercase;margin-bottom:14px;
+}
+.topics-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+.topic-card{
+  background:linear-gradient(135deg,rgba(200,0,106,0.08),rgba(80,0,120,0.12));
+  border:1px solid rgba(200,0,106,0.3);
+  border-radius:4px;
+  padding:14px 8px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+  cursor:default;
+}
+.topic-card::before{
+  content:'';position:absolute;
+  top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,215,0,0.08),transparent);
+  transition:left 0.5s;
+}
+.topic-card:hover::before{left:100%;}
+.topic-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 24px rgba(200,0,106,0.3);
+  border-color:rgba(255,215,0,0.5);
+}
+.topic-icon{font-size:1.6rem;display:block;margin-bottom:6px;}
+.topic-name{
+  font-family:'Cinzel',serif;
+  font-size:clamp(0.5rem,1.1vw,0.7rem);
+  font-weight:700;color:#fff;
+  letter-spacing:1px;text-transform:uppercase;
+  line-height:1.3;
+}
+
+/* ── DATE + VENUE SECTION ── */
+.date-venue{
+  width:100%;max-width:900px;
+  padding:24px 20px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  animation:fadeIn 2.2s ease both;
+}
+
+.date-block{
+  display:flex;align-items:center;
+  gap:0;
+  background:linear-gradient(135deg,rgba(200,0,106,0.1),rgba(80,0,120,0.15));
+  border:1px solid rgba(200,0,106,0.4);
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(200,0,106,0.2);
+}
+.date-cell{
+  padding:14px 24px;
+  text-align:center;
+  border-right:1px solid rgba(200,0,106,0.3);
+}
+.date-cell:last-child{border-right:none;}
+.date-cell-label{
+  font-size:0.55rem;letter-spacing:4px;
+  color:#c8a0b0;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.date-cell-value{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1rem,3vw,1.8rem);
+  font-weight:900;color:#ffd700;
+  text-shadow:0 0 14px rgba(255,215,0,0.7);
+  white-space:nowrap;
+  line-height:1;
+}
+.date-cell-sub{
+  font-size:0.55rem;letter-spacing:2px;
+  color:#c8a0b0;text-transform:uppercase;
+  margin-top:3px;
+}
+.date-sep{
+  padding:0 16px;
+  font-size:1.4rem;color:#c8006a;
+  text-shadow:0 0 10px #c8006a;
+  animation:arrowPulse 1s infinite alternate;
+}
+@keyframes arrowPulse{from{opacity:0.3;}to{opacity:1;}}
+
+/* ── BOTTOM TICKER ── */
+.ticker{
+  position:fixed;bottom:0;left:0;width:100%;
+  z-index:10;
+  background:linear-gradient(90deg,#0d0008,#1a0015,#0d0008);
+  border-top:1px solid rgba(200,0,106,0.4);
+  padding:8px 0;overflow:hidden;
+}
+.ticker-track{
+  display:flex;width:max-content;
+  animation:tickScroll 45s linear infinite;
+}
+.ticker-track:hover{animation-play-state:paused;}
+@keyframes tickScroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+.ticker-item{
+  white-space:nowrap;padding:0 50px;
+  font-size:clamp(0.65rem,1.3vw,0.85rem);
+  font-weight:600;letter-spacing:1px;
+}
+.tq1{color:#ffd700;} .tq2{color:#ff6eb0;} .tq3{color:#c9a0ff;}
+.tq4{color:#80ffea;} .tq5{color:#ff9966;}
+.ticker-dot{color:#c8006a;margin:0 12px;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* gear/orbit SVG animations */
+.g-spin{animation:gSpin 8s linear infinite;transform-origin:25px 25px;}
+.g-spin-r{animation:gSpin 6s linear infinite reverse;transform-origin:25px 25px;}
+@keyframes gSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.orb1{animation:gSpin 5s linear infinite;transform-origin:25px 25px;}
+.orb2{animation:gSpin 9s linear infinite reverse;transform-origin:25px 25px;}
+.cpulse{animation:cp 2s ease-in-out infinite alternate;}
+@keyframes cp{from{opacity:0.3;}to{opacity:1;}}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — TABLET  ≤ 768px
+══════════════════════════════════════ */
+@media(max-width:768px){
+  .page{padding-bottom:55px;}
+  /* top bar */
+  .top-bar{padding:8px 10px;gap:6px;}
+  .logo-circle{width:54px;height:54px;}
+  .logo-circle svg{width:42px;height:42px;}
+  .logo-name{font-size:0.55rem;letter-spacing:1px;}
+  .logo-place{font-size:0.4rem;letter-spacing:2px;}
+  .bar-college{font-size:clamp(0.65rem,2vw,1rem);letter-spacing:2px;}
+  .bar-dept{font-size:0.52rem;letter-spacing:2px;}
+  /* hero */
+  .hero{padding:30px 16px 16px;}
+  .sambhrama{font-size:clamp(1.8rem,7vw,4.5rem);}
+  .event-name{font-size:clamp(0.9rem,3.5vw,2.2rem);}
+  /* topics */
+  .topics-section{padding:18px 14px 0;}
+  .topics-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .topic-card{padding:14px 10px;}
+  /* date */
+  .date-venue{padding:18px 14px 0;}
+  .date-block{flex-wrap:wrap;justify-content:center;width:100%;}
+  .date-cell{flex:1 1 40%;border-right:none;border-bottom:1px solid rgba(200,0,106,0.2);padding:12px 10px;min-width:120px;}
+  .date-cell:last-child{border-bottom:none;}
+  .date-sep{display:none;}
+  .date-cell-value{font-size:clamp(1rem,3.5vw,1.5rem);}
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — PHONE  ≤ 480px
+══════════════════════════════════════ */
+@media(max-width:480px){
+  .page{padding-bottom:48px;}
+  /* top bar — logos left/right, college name stacks below */
+  .top-bar{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    grid-template-rows:auto auto;
+    align-items:center;
+    padding:8px 8px 6px;
+    gap:4px;
+  }
+  .top-bar-logo:first-child{grid-column:1;grid-row:1;}
+  .top-bar-center{grid-column:1/-1;grid-row:2;padding-top:6px;border-top:1px solid rgba(200,0,106,0.2);margin-top:4px;}
+  .top-bar-logo:last-child{grid-column:3;grid-row:1;}
+  /* logos compact */
+  .top-bar-logo{gap:6px;}
+  .logo-circle{width:46px;height:46px;}
+  .logo-circle svg{width:36px;height:36px;}
+  .logo-name{font-size:0.48rem;letter-spacing:0.5px;line-height:1.2;}
+  .logo-place{display:none;}
+  /* center text */
+  .bar-college{font-size:clamp(0.6rem,3.2vw,0.9rem);letter-spacing:1px;}
+  .bar-dept{font-size:0.5rem;letter-spacing:2px;}
+  /* hero */
+  .hero{padding:22px 12px 12px;}
+  .hero::before,.hero::after{font-size:1rem;top:14px;}
+  .presents-tag{font-size:0.55rem;letter-spacing:4px;}
+  .sambhrama{font-size:clamp(1.5rem,9vw,3rem);letter-spacing:clamp(2px,1.5vw,6px);}
+  .ornament{width:88vw;margin:10px 0;}
+  .ornament-gem{font-size:1rem;}
+  .event-name{font-size:clamp(0.85rem,5vw,1.6rem);letter-spacing:clamp(3px,2vw,8px);}
+  .event-sub{font-size:0.55rem;letter-spacing:3px;}
+  /* topics */
+  .topics-section{padding:14px 10px 0;}
+  .topics-title{font-size:0.55rem;letter-spacing:4px;margin-bottom:10px;}
+  .topics-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .topic-card{padding:10px 6px;}
+  .topic-icon{font-size:1.3rem;margin-bottom:4px;}
+  .topic-name{font-size:0.5rem;letter-spacing:0.5px;}
+  /* date */
+  .date-venue{padding:14px 10px 0;}
+  .date-block{flex-direction:column;width:100%;border-radius:6px;}
+  .date-cell{
+    flex:none;width:100%;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 16px;
+    border-bottom:1px solid rgba(200,0,106,0.2);
+    border-right:none;
+  }
+  .date-cell:last-child{border-bottom:none;}
+  .date-cell-label{font-size:0.5rem;letter-spacing:3px;margin-bottom:0;margin-right:10px;min-width:40px;text-align:left;}
+  .date-cell-value{font-size:clamp(0.9rem,4.5vw,1.2rem);text-align:right;}
+  .date-cell-sub{font-size:0.45rem;text-align:right;margin-top:0;margin-left:6px;}
+  .date-sep{display:none;}
+  /* ticker */
+  .ticker{padding:6px 0;}
+  .ticker-item{padding:0 20px;font-size:0.6rem;}
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — SMALL PHONE  ≤ 360px
+══════════════════════════════════════ */
+@media(max-width:360px){
+  .logo-circle{width:40px;height:40px;}
+  .logo-circle svg{width:30px;height:30px;}
+  .logo-name{font-size:0.42rem;}
+  .bar-college{font-size:0.6rem;}
+  .sambhrama{font-size:clamp(1.2rem,8.5vw,2.2rem);}
+  .event-name{font-size:clamp(0.75rem,4.5vw,1.2rem);}
+  .topics-grid{grid-template-columns:1fr 1fr;gap:6px;}
+  .topic-card{padding:8px 4px;}
+  .topic-icon{font-size:1.1rem;}
+  .topic-name{font-size:0.45rem;}
+  .date-cell{padding:8px 12px;}
+  .date-cell-value{font-size:0.9rem;}
+  .ticker-item{padding:0 14px;font-size:0.55rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+
+<div class="page">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+
+    <!-- KLE Logo LEFT -->
+    <div class="top-bar-logo">
+      <div class="logo-circle kle">
+        <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="g1"><feGaussianBlur stdDeviation="1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <circle cx="25" cy="25" r="23" fill="#001020"/>
+          <g class="g-spin" filter="url(#g1)">
+            <circle cx="25" cy="25" r="21" fill="none" stroke="#c8006a" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.7"/>
+            <rect x="23.5" y="3" width="3" height="5" rx="0.5" fill="#c8006a"/>
+            <rect x="23.5" y="42" width="3" height="5" rx="0.5" fill="#c8006a"/>
+            <rect x="3" y="23.5" width="5" height="3" rx="0.5" fill="#c8006a"/>
+            <rect x="42" y="23.5" width="5" height="3" rx="0.5" fill="#c8006a"/>
+          </g>
+          <g class="g-spin-r" filter="url(#g1)">
+            <circle cx="25" cy="25" r="14" fill="none" stroke="#ffd700" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.6"/>
+          </g>
+          <path d="M25 10 L33 15 L33 27 Q33 35 25 39 Q17 35 17 27 L17 15 Z" fill="rgba(200,0,106,0.1)" stroke="#c8006a" stroke-width="0.8" filter="url(#g1)"/>
+          <text x="25" y="24" text-anchor="middle" font-family="Arial Black" font-size="7" font-weight="900" fill="#fff" filter="url(#g1)" letter-spacing="0.5">KLE</text>
+          <text x="25" y="32" text-anchor="middle" font-family="Arial" font-size="4.5" font-weight="700" fill="#ffd700" filter="url(#g1)" letter-spacing="1">CET</text>
+        </svg>
+      </div>
+      <div class="logo-text-wrap">
+        <div class="logo-name">KLE College of<br>Engg &amp; Tech</div>
+        <div class="logo-place">Chikkodi · Est.1982</div>
+      </div>
+    </div>
+
+    <!-- Center college name -->
+    <div class="top-bar-center">
+      <div class="bar-college">KLE College of Engineering &amp; Technology</div>
+      <div class="bar-dept">✦ Department of MCA ✦</div>
+    </div>
+
+    <!-- MCA Logo RIGHT -->
+    <div class="top-bar-logo" style="flex-direction:row-reverse;">
+      <div class="logo-circle mca">
+        <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="g2"><feGaussianBlur stdDeviation="1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <circle cx="25" cy="25" r="23" fill="#0d0020"/>
+          <g class="orb1">
+            <circle cx="25" cy="25" r="21" fill="none" stroke="#ffd700" stroke-width="0.7" stroke-dasharray="3 4" opacity="0.5"/>
+            <circle cx="25" cy="4" r="2" fill="#ffd700" filter="url(#g2)"/>
+          </g>
+          <g class="orb2">
+            <circle cx="25" cy="25" r="14" fill="none" stroke="#c8006a" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.5"/>
+            <circle cx="25" cy="11" r="1.5" fill="#ff6eb0" filter="url(#g2)"/>
+          </g>
+          <g class="cpulse" stroke="#ffd700" stroke-width="0.6" fill="none" opacity="0.5">
+            <line x1="25" y1="25" x2="10" y2="10"/>
+            <line x1="25" y1="25" x2="40" y2="10"/>
+            <line x1="25" y1="25" x2="10" y2="40"/>
+            <line x1="25" y1="25" x2="40" y2="40"/>
+          </g>
+          <polygon points="25,14 32,18.5 32,27.5 25,32 18,27.5 18,18.5" fill="rgba(255,215,0,0.08)" stroke="#ffd700" stroke-width="0.8" filter="url(#g2)"/>
+          <text x="25" y="24" text-anchor="middle" font-family="Arial Black" font-size="7" font-weight="900" fill="#fff" filter="url(#g2)" letter-spacing="0.5">MCA</text>
+          <text x="25" y="31" text-anchor="middle" font-family="Arial" font-size="4" font-weight="700" fill="#ffd700" filter="url(#g2)" letter-spacing="1">DEPT</text>
+        </svg>
+      </div>
+      <div class="logo-text-wrap" style="text-align:right;">
+        <div class="logo-name">MCA<br>Department</div>
+        <div class="logo-place">KLE CET · 2025</div>
+      </div>
+    </div>
+
+  </div><!-- /top-bar -->
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="presents-tag">✦ &nbsp; MCA Department Presents &nbsp; ✦</div>
+
+    <div class="sambhrama">SAMBHRAMA</div>
+
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-gem">❋</div>
+      <div class="ornament-line rev"></div>
+    </div>
+
+    <div class="event-name">CODING &nbsp; WORLD</div>
+    <div class="event-sub">— A National Level Technical Fest —</div>
+  </div>
+
+  <!-- TOPICS -->
+  <div class="topics-section">
+    <div class="topics-title">✦ &nbsp; Event Tracks &nbsp; ✦</div>
+    <div class="topics-grid">
+      <div class="topic-card">
+        <span class="topic-icon">🤖</span>
+        <div class="topic-name">AI &amp; Machine<br>Learning</div>
+      </div>
+      <div class="topic-card">
+        <span class="topic-icon">🛡️</span>
+        <div class="topic-name">Cyber<br>Security</div>
+      </div>
+      <div class="topic-card">
+        <span class="topic-icon">🦾</span>
+        <div class="topic-name">Robotics</div>
+      </div>
+      <div class="topic-card">
+        <span class="topic-icon">🌐</span>
+        <div class="topic-name">Web<br>Design</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATE -->
+  <div class="date-venue">
+    <div class="date-block">
+      <div class="date-cell">
+        <div class="date-cell-label">Event</div>
+        <div class="date-cell-value">SAMBHRAMA</div>
+        <div class="date-cell-sub">Coding World 2025</div>
+      </div>
+      <div class="date-sep">◆</div>
+      <div class="date-cell">
+        <div class="date-cell-label">From</div>
+        <div class="date-cell-value">APR 15</div>
+        <div class="date-cell-sub">Monday</div>
+      </div>
+      <div class="date-sep">→</div>
+      <div class="date-cell">
+        <div class="date-cell-label">To</div>
+        <div class="date-cell-value">APR 19</div>
+        <div class="date-cell-sub">Friday</div>
+      </div>
+      <div class="date-sep">◆</div>
+      <div class="date-cell">
+        <div class="date-cell-label">Venue</div>
+        <div class="date-cell-value" style="font-size:clamp(0.75rem,2vw,1.1rem);">KLE CET</div>
+        <div class="date-cell-sub">Chikkodi, Karnataka</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<script>
+  // Ticker quotes
+  const quotes = [
+    {t:'"Code is the language the future speaks — learn it before the future speaks without you."', c:'tq1'},
+    {t:'"AI doesn\'t replace thinkers — it amplifies them. Be the thinker."', c:'tq2'},
+    {t:'"In a world full of cyber threats, your knowledge is the strongest firewall."', c:'tq3'},
+    {t:'"Robotics is not science fiction anymore — it\'s the science you build today."', c:'tq4'},
+    {t:'"A great web design is not just seen — it is felt, experienced, and remembered."', c:'tq5'},
+    {t:'"Every line of code you write is a brick in the bridge between today and tomorrow."', c:'tq1'},
+    {t:'"Security is not a product — it\'s a mindset forged through knowledge and practice."', c:'tq2'},
+    {t:'"The best robots are built by humans who never stopped being curious."', c:'tq3'},
+    {t:'"Design is intelligence made visible — make yours unforgettable."', c:'tq4'},
+  ];
+  const track = document.getElementById('tickerTrack');
+  [...quotes,...quotes].forEach(q=>{
+    const s = document.createElement('span');
+    s.className = `ticker-item ${q.c}`;
+    s.innerHTML = q.t + '<span class="ticker-dot">◆</span>';
+    track.appendChild(s);
+  });
+</script>
+</body>
+</html>
